@@ -24,6 +24,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../redux/actionTypes";
 
 
+
 const Header = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state.authentication);
@@ -31,7 +32,12 @@ const Header = () => {
   const [value, setValue] = React.useState('')
   const handleChange = (event) => {
     setValue(event.target.value)
+  };
+  const handleSubmit = (event) => {
     event.preventDefault();
+    if (event.key === "Enter") {
+      location.assign("http://www.mozilla.org");
+    }
     navigate('/sofa');
   };
 
@@ -129,15 +135,21 @@ const Header = () => {
           <InputLeftElement pointerEvents="none" mt={1} ml={2}>
             <Search2Icon />
           </InputLeftElement>
-          <Input
-            pl="3.5rem"
-            placeholder="Find anything home..."
-            value={value}
-            onChange={handleChange}
-            border={"1px solid"}
-            height={"50px"}
-            _hover={'none'}
-          />
+          <form style={{
+            width:'800px'
+            }} onSubmit={handleSubmit}>
+            <Input
+              pl="3.5rem"
+              placeholder="Find anything home..."
+              value={value}
+              onChange={handleChange}
+              
+              onSubmit={handleSubmit}
+              border={"1px solid"}
+              height={"50px"}
+              _hover={'none'}
+            />
+          </form>
         </InputGroup>
         <Flex gap={4} marginLeft={"100px"} width={"300px"}>
           <Flex
