@@ -20,12 +20,20 @@ import React from "react";
 import { IoCartOutline } from "react-icons/io5";
 import { RxAvatar } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../redux/actionTypes";
 
+
 const Header = () => {
+  const navigate = useNavigate();
   const state = useSelector((state) => state.authentication);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const [value, setValue] = React.useState('')
+  const handleChange = (event) => {
+    setValue(event.target.value)
+    event.preventDefault();
+    navigate('/sofa');
+  };
 
   const Logout = () => {
     return (
@@ -124,6 +132,8 @@ const Header = () => {
           <Input
             pl="3.5rem"
             placeholder="Find anything home..."
+            value={value}
+            onChange={handleChange}
             border={"1px solid"}
             height={"50px"}
             _hover={'none'}
